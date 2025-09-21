@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, ShoppingCart, User } from "lucide-react";
+import { Menu, User } from "lucide-react";
+import Cart from "@/components/Cart";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +13,14 @@ const Navigation = () => {
     { name: "Track Order", href: "#tracking" },
     { name: "For Restaurants", href: "#dashboard" },
   ];
+
+  const handleNavClick = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsOpen(false);
+  };
 
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
@@ -27,24 +36,19 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
+                onClick={() => handleNavClick(item.href)}
                 className="text-foreground hover:text-primary transition-colors font-medium"
               >
                 {item.name}
-              </a>
+              </button>
             ))}
           </div>
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="relative">
-              <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                3
-              </span>
-            </Button>
+            <Cart />
             <Button variant="ghost" size="sm">
               <User className="h-5 w-5" />
             </Button>
@@ -70,22 +74,20 @@ const Navigation = () => {
                 
                 <div className="flex flex-col space-y-4">
                   {navItems.map((item) => (
-                    <a
+                    <button
                       key={item.name}
-                      href={item.href}
-                      className="text-foreground hover:text-primary transition-colors font-medium py-2"
-                      onClick={() => setIsOpen(false)}
+                      onClick={() => handleNavClick(item.href)}
+                      className="text-foreground hover:text-primary transition-colors font-medium py-2 text-left w-full"
                     >
                       {item.name}
-                    </a>
+                    </button>
                   ))}
                 </div>
 
                 <div className="flex flex-col space-y-4 pt-4 border-t">
-                  <Button variant="ghost" className="justify-start">
-                    <ShoppingCart className="h-5 w-5 mr-2" />
-                    Cart (3)
-                  </Button>
+                  <div className="flex justify-start">
+                    <Cart />
+                  </div>
                   <Button variant="ghost" className="justify-start">
                     <User className="h-5 w-5 mr-2" />
                     Account

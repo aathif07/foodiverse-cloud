@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Search, Star, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useCart } from "@/contexts/CartContext";
 
 const menuItems = [
   {
@@ -76,7 +77,7 @@ const categories = ["All", "Pizza", "Burgers", "Salads", "Mexican", "Asian", "De
 const FoodMenu = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [cart, setCart] = useState<{id: number, quantity: number}[]>([]);
+  const { addToCart, items } = useCart();
   const { toast } = useToast();
 
   const filteredItems = menuItems.filter(item => {
@@ -86,25 +87,22 @@ const FoodMenu = () => {
     return matchesSearch && matchesCategory;
   });
 
-  const addToCart = (itemId: number, itemName: string) => {
-    setCart(prev => {
-      const existing = prev.find(item => item.id === itemId);
-      if (existing) {
-        return prev.map(item => 
-          item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      }
-      return [...prev, { id: itemId, quantity: 1 }];
+  const handleAddToCart = (item: typeof menuItems[0]) => {
+    addToCart({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      image: item.image
     });
 
     toast({
       title: "Added to cart",
-      description: `${itemName} has been added to your cart.`,
+      description: `${item.name} has been added to your cart.`,
     });
   };
 
   const getCartQuantity = (itemId: number) => {
-    return cart.find(item => item.id === itemId)?.quantity || 0;
+    return items.find(item => item.id === itemId)?.quantity || 0;
   };
 
   return (
@@ -182,7 +180,7 @@ const FoodMenu = () => {
               <CardFooter className="p-4 pt-0">
                 <Button 
                   className="w-full bg-primary hover:bg-primary-hover text-white"
-                  onClick={() => addToCart(item.id, item.name)}
+                  onClick={() => handleAddToCart(item)}
                 >
                   <Plus className="h-4 w-4 mr-2" />
                   Add to Cart
