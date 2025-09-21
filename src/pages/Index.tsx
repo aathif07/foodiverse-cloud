@@ -1,12 +1,27 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Navigation from "@/components/Navigation";
+import Hero from "@/components/Hero";
+import FoodMenu from "@/components/FoodMenu";
+import OrderTracking from "@/components/OrderTracking";
+import RestaurantDashboard from "@/components/RestaurantDashboard";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Navigation />
+      <main>
+        <section id="home">
+          <Hero />
+        </section>
+        <section id="menu">
+          <FoodMenu />
+        </section>
+        <section id="tracking">
+          <OrderTracking />
+        </section>
+        <section id="dashboard">
+          <RestaurantDashboard />
+        </section>
+      </main>
     </div>
   );
 };
