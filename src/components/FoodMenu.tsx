@@ -12,7 +12,7 @@ const menuItems = [
     id: 1,
     name: "Margherita Pizza",
     description: "Fresh mozzarella, tomato sauce, basil leaves",
-    price: 18.99,
+    price: 299,
     rating: 4.8,
     time: "25-30 min",
     category: "Pizza",
@@ -23,7 +23,7 @@ const menuItems = [
     id: 2,
     name: "Chicken Burger",
     description: "Grilled chicken breast, lettuce, tomato, special sauce",
-    price: 14.99,
+    price: 249,
     rating: 4.6,
     time: "15-20 min",
     category: "Burgers",
@@ -33,7 +33,7 @@ const menuItems = [
     id: 3,
     name: "Caesar Salad",
     description: "Crisp romaine, parmesan, croutons, caesar dressing",
-    price: 12.99,
+    price: 199,
     rating: 4.4,
     time: "10-15 min",
     category: "Salads",
@@ -43,7 +43,7 @@ const menuItems = [
     id: 4,
     name: "Beef Tacos",
     description: "Seasoned ground beef, lettuce, cheese, salsa",
-    price: 16.99,
+    price: 279,
     rating: 4.7,
     time: "20-25 min",
     category: "Mexican",
@@ -54,7 +54,7 @@ const menuItems = [
     id: 5,
     name: "Chocolate Cake",
     description: "Rich chocolate cake with creamy frosting",
-    price: 8.99,
+    price: 149,
     rating: 4.9,
     time: "5-10 min",
     category: "Desserts",
@@ -64,7 +64,7 @@ const menuItems = [
     id: 6,
     name: "Pad Thai",
     description: "Stir-fried rice noodles with shrimp, tofu, peanuts",
-    price: 15.99,
+    price: 259,
     rating: 4.5,
     time: "20-25 min",
     category: "Asian",
@@ -169,7 +169,7 @@ const FoodMenu = () => {
                 <p className="text-muted-foreground text-sm mb-3">{item.description}</p>
                 
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-primary">${item.price}</span>
+                  <span className="text-2xl font-bold text-primary">₹{item.price}</span>
                   <div className="flex items-center gap-1">
                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     <span className="text-sm font-medium">{item.rating}</span>

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ShoppingCart, Plus, Minus, Trash2 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { Checkout } from "@/components/OrderTracking";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
@@ -51,7 +52,7 @@ const Cart = () => {
                     />
                     <div className="flex-1">
                       <h4 className="font-medium">{item.name}</h4>
-                      <p className="text-sm text-muted-foreground">${item.price.toFixed(2)} each</p>
+                      <p className="text-sm text-muted-foreground">₹{item.price.toFixed(0)} each</p>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Button
@@ -89,13 +90,11 @@ const Cart = () => {
               <div className="space-y-4">
                 <div className="flex justify-between items-center text-lg font-semibold">
                   <span>Total:</span>
-                  <span>${totalPrice.toFixed(2)}</span>
+                  <span>₹{totalPrice.toFixed(0)}</span>
                 </div>
                 
                 <div className="space-y-2">
-                  <Button className="w-full" size="lg">
-                    Proceed to Checkout
-                  </Button>
+                  <Checkout />
                   <Button variant="outline" className="w-full" onClick={clearCart}>
                     Clear Cart
                   </Button>
